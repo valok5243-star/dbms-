@@ -1,0 +1,35 @@
+CREATE TABLE Student_Log (
+    log_msg VARCHAR(255)
+);
+
+
+DELIMITER //
+
+CREATE PROCEDURE ProcessStudentNames()
+BEGIN
+    DECLARE done INT DEFAULT FALSE;
+    DECLARE s_name VARCHAR(100);
+    
+    DECLARE cur1 CURSOR FOR SELECT name FROM Student;
+    
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+
+    OPEN cur1;
+
+    read_loop: LOOP
+        FETCH cur1 INTO s_name;
+        IF done THEN
+            LEAVE read_loop;
+        END IF;
+        
+        INSERT INTO Student_Log VALUES (CONCAT('Processing Student: ', s_name));
+    END LOOP;
+
+    CLOSE cur1;
+END //
+
+DELIMITER ;
+
+
+CALL ProcessStudentNames();
+SELECT * FROM Student_Log;

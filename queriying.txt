@@ -1,0 +1,17 @@
+queriying 
+
+INSERT INTO Student (id, name, student_age, dept_id) VALUES (6, 'pavan', 23, 101);
+
+SELECT Student.name, Department.dept_name 
+FROM Student 
+INNER JOIN Department ON Student.dept_id = Department.dept_id;
+
+SELECT name FROM Student WHERE student_age > 21
+UNION
+SELECT name FROM Student WHERE dept_id = 101;
+
+SELECT name FROM Student 
+WHERE dept_id = 101 AND name IN (SELECT name FROM Student WHERE student_age > 20);
+
+SELECT name, student_age FROM Student 
+WHERE student_age > ANY (SELECT student_age FROM Student WHERE dept_id = 102);

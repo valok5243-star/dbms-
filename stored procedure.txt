@@ -1,0 +1,22 @@
+DELIMITER //
+CREATE PROCEDURE GetStudentsByDept(IN d_id INT)
+BEGIN
+    SELECT name, student_age FROM Student WHERE dept_id = d_id;
+END //
+DELIMITER ;
+
+
+
+DELIMITER //
+CREATE PROCEDURE CountStudents(OUT total INT)
+BEGIN
+    SELECT COUNT(*) INTO total FROM Student;
+END //
+DELIMITER ;
+
+
+
+CALL GetStudentsByDept(101);
+
+CALL CountStudents(@student_count);
+SELECT @student_count AS Total_Students;

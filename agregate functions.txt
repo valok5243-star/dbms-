@@ -1,0 +1,17 @@
+SELECT dept_id, COUNT(*) AS total_students, AVG(student_age) AS avg_age, MAX(student_age) AS oldest
+FROM Student
+GROUP BY dept_id;
+
+SELECT dept_id, COUNT(*) AS count
+FROM Student
+GROUP BY dept_id
+HAVING count > 2;
+
+CREATE VIEW StudentInfo AS
+SELECT s.name, s.student_age, d.dept_name
+FROM Student s
+JOIN Department d ON s.dept_id = d.dept_id;
+
+SELECT * FROM StudentInfo;
+
+DROP VIEW StudentInfo;

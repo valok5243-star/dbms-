@@ -1,0 +1,23 @@
+SELECT name 
+FROM Student 
+WHERE dept_id = (SELECT dept_id FROM Student WHERE name = 'Vikram');
+
+
+SELECT name, student_age, dept_id
+FROM Student s1
+WHERE student_age > (
+    SELECT AVG(student_age) 
+    FROM Student s2 
+    WHERE s1.dept_id = s2.dept_id
+);
+
+SELECT dept_name 
+FROM Department d
+WHERE EXISTS (
+    SELECT 1 
+    FROM Student s 
+    WHERE s.dept_id = d.dept_id
+);
+
+
+
