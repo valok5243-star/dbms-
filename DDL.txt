@@ -1,0 +1,24 @@
+DDL
+
+ALTER TABLE Student ADD phone VARCHAR(15);
+
+ALTER TABLE Student MODIFY name VARCHAR(100);
+
+ALTER TABLE Student CHANGE COLUMN age student_age INT;
+
+DML
+
+NSERT INTO Student (id, name, age, dept_id) 
+VALUES (4, 'Amit', 22, 102), (5, 'Priya', 21, 101);
+
+
+UPDATE Student 
+SET dept_id = 102 
+WHERE name = 'Rahul';
+
+UPDATE Student 
+SET age = age + 1 
+WHERE dept_id = 101;
+
+DELETE FROM Student 
+WHERE id = 4;
